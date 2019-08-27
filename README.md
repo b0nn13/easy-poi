@@ -121,7 +121,7 @@ Uma vez que o modelo de domínio esteja mapeado com todos os metadados a classe 
 
 Exemplo: 
 ```
-  Bill bill = repository.getBill(billId);
+  Bill bill = repository.get(billId);
   ByteArrayOutputStream out = EasyPOIExcel.build(bill)
   // code to export here
 ```
@@ -129,7 +129,7 @@ Exemplo:
 ou
 
 ```
-  Bill bill = repository.getBill(billId);
+  Bill bill = repository.get(billId);
   XSSFWorkbook out = EasyPOIExcel.buildWorkBook(bill)
   // code to export here
 ```
