@@ -29,7 +29,7 @@ Exemplo:
 | format   | true     |  Indentifica o tipo de formação para o valor da coluna.                                                                                   |  NoneEPFormat.class* |
 | pattern  | true     | Pattern customizado. Os formats possuem patterns padronizados, entretando caso queira customizar o pattern de formação utilize essa opção |                                                                                                                                                                                                                                                                                                             |
 
-###Outros formatos:
+### Outros formatos:
 
 * DateTimeEPFormat para colunas do tipo data/hora 
 * DecimalEPFormat para colunas do tipo numérico 
@@ -37,12 +37,12 @@ Exemplo:
 * OnOffEPFormat  para colunas do tipo 'Ligado' / 'Desligado' 
 * YesNoEPFormat  para colunas do tipo 'Sim' / 'Não'
 
-### Formatados customizados
+### Formatadores customizados
 É possível customizar um formato implementando a interface aaaaa
 
-Exempplo:
+Exemplo:
 ```
-// Implementation of new custo format
+// Implementation of new custom format
 public class MyCustomFormat implements FormatEP
 {
     
