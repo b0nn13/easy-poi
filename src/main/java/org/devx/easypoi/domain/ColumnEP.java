@@ -29,7 +29,7 @@ public @interface ColumnEP
     String value();
     
     /**
-     * Indentifica o tipo de formação para o valor da coluna.
+     * Identifica o tipo de formação para o valor da coluna.
      * Opções disponíveis:
      * <li> {@link DateTimeEPFormat} para colunas do tipo <b>data/hora</b>
      * <li> {@link DecimalEPFormat} para colunas do tipo <b>numérico</b>
