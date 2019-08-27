@@ -4,8 +4,8 @@ Easy POI - Make XLSX files using POI
 
 Para utilizar o EasyPOI inicialmente crie um modelo de domínio que represente o documento excel.
 
-# @SheetEP
-Para identificar as collections que contenham os dados que serão inseridos nas abas(folhas) da planilha excel utilize a annotation @SheetEP.
+## @SheetEP
+Para identificar as collections que contenham os dados à serem inseridos nas abas(folhas) da planilha excel utilize a annotation @SheetEP.
 
 Exemplo:
 
@@ -14,12 +14,13 @@ Exemplo:
   private List<DetailBill> details;
 ```
 
-# @ColumnEP
-Um vez que tenha identificado as abas(folhas) de sua planilha utilize a annotation @ColumnEP para informar os metadados de uma coluna a ser criada na aba(folha) pelo EasyPOI
+## @ColumnEP
+Uma vez identificadas as abas(folhas) de sua planilha utilize a annotation @ColumnEP para informar os metadados das colunas a serem criadas na aba(folha) pelo EasyPOI
 
 Exemplo:
 ```
   @ColumnEP(value = "Total a pagar", format = DecimalEPFormat.class, pattern="#0.00")
+  private Double total;
 ```
 
 | Atributo | Opcional | Descrição                                                                                                                                 | Valor padrão                                                                                                                                                                                                                                                                                                |
@@ -28,13 +29,44 @@ Exemplo:
 | format   | true     |  Indentifica o tipo de formação para o valor da coluna.                                                                                   |  NoneEPFormat.class* |
 | pattern  | true     | Pattern customizado. Os formats possuem patterns padronizados, entretando caso queira customizar o pattern de formação utilize essa opção |                                                                                                                                                                                                                                                                                                             |
 
-*Outros formats: 
+###Outros formatos:
+
 * DateTimeEPFormat para colunas do tipo data/hora 
 * DecimalEPFormat para colunas do tipo numérico 
 * EnableEPFormat para colunas do tipo 'Ativado' / 'Desativado' 
 * OnOffEPFormat  para colunas do tipo 'Ligado' / 'Desligado' 
 * YesNoEPFormat  para colunas do tipo 'Sim' / 'Não'
 
+### Formatados customizados
+É possível customizar um formato implementando a interface aaaaa
+
+Exempplo:
+```
+// Implementation of new custo format
+public class MyCustomFormat implements FormatEP
+{
+    
+    @Override
+    public Object format(String fieldName, Object value, String defaultFormat)
+    {
+        validate(fieldName, value.getClass());
+        return value + " formated";
+    }
+    
+    @Override
+    public Set<Class> getAutorizedTypes()
+    {
+        Set<Class> autorizedTypes = new HashSet<>();
+        autorizedTypes.add(Number.class);
+        return autorizedTypes;
+    }
+    
+}
+
+// Add new format
+FormatEPFactory.addFormatter(new MyCustomFormat());
+
+```
 A seguir alguns exemplos de mapeamento de colunas
 
 ```
@@ -81,7 +113,7 @@ private Float lat;
 private Float lng;
 ```
 
-# Exportando Excel
+## Exportando Excel
 Uma vez que o modelo de domínio esteja mapeado com todos os metadados a classe utilitária EasyPOIExcel disponibilizará duas opções para criação do excel.
 
 1. Utilizar o método build para criar um java.io.ByteArrayOutputStream com a planilha à ser manipulada
